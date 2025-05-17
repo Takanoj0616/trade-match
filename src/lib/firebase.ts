@@ -4,7 +4,7 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDls4gfqeB8GOLYZQJi1NpWktWytxuf_6Q",
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
     authDomain: "match-next.firebaseapp.com",
     projectId: "match-next",
     storageBucket: "match-next.firebasestorage.app",
@@ -20,4 +20,4 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-export { app, auth, db, storage }; 
+export { app, auth, db, storage };
