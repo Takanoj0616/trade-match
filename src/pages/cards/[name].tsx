@@ -22,18 +22,6 @@ const CardDetail = () => {
     alert('交換リストに追加しました');
   };
 
-  const handleExhibit = async () => {
-    if (!card || !user) return;
-    await addDoc(collection(db, 'tradeCards'), {
-      ...card,
-      ownerId: user.uid,
-      ownerName: user.displayName,
-      exhibitedAt: new Date(),
-    });
-    alert('カードを出品しました');
-    router.push('/tradeList'); // 出品後に交換一覧へ遷移
-  };
-
   if (!card) {
     return <div>カードが見つかりません</div>;
   }
@@ -46,7 +34,10 @@ const CardDetail = () => {
       <div className={styles.cardType}>タイプ: {card.type}</div>
       <button className={styles.tradeButton} onClick={handleAddToTrade}>交換に出す</button>
       {user && (
-        <button className={styles.exhibitButton} onClick={handleExhibit}>
+        <button
+          className={styles.exhibitButton}
+          onClick={() => router.push(`/cards/${card.name}/exhibit`)}
+        >
           出品する
         </button>
       )}

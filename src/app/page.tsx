@@ -32,7 +32,7 @@ const HomePage = () => {
           マッチング一覧
         </button>
         <button onClick={() => router.push('/showCards')} className={styles.buttonPurple}>
-          カード一覧
+          自分のカード一覧
         </button>
         <button onClick={() => router.push('/allCards')} className={styles.buttonPurple}>
           全体カード一覧
@@ -41,10 +41,16 @@ const HomePage = () => {
           交換リスト
         </button>
         <button onClick={() => router.push('/exchangeRequests')} className={styles.buttonPurple}>
-          交換リクエスト
+          あなた宛交換リクエスト
+        </button>
+        <button onClick={() => router.push('/incoming')} className={styles.buttonPurple}>
+          あなたが送った交換リクエスト
         </button>
         <button onClick={() => router.push('/exchangeHistory')} className={styles.buttonPurple}>
           交換履歴
+        </button>
+        <button onClick={() => router.push('/exhibitList')} className={styles.buttonPurple}>
+          出品一覧
         </button>
         <button onClick={() => router.push('/createCard')} className={styles.buttonPurple}>
           カード新規作成
