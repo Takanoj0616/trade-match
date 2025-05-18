@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { db } from '../lib/firebase';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import styles from '../styles/cardDetail.module.css';
+import { useRouter } from 'next/router';
 
 type TradeCard = {
   id: string;
@@ -11,13 +12,14 @@ type TradeCard = {
   type: string;
   ownerId: string;
   ownerName?: string;
-  exhibitedAt?: any;
+  exhibitedAt?: Date;
   price?: number;
 };
 
 const ExhibitList = () => {
   const [cards, setCards] = useState<TradeCard[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -28,6 +30,13 @@ const ExhibitList = () => {
     };
     fetchCards();
   }, []);
+
+  const handlePurchase = (cardId: string, price: number) => {
+    router.push({
+      pathname: '/payment',
+      query: { cardId, price }
+    });
+  };
 
   if (loading) return <div>読み込み中...</div>;
 
@@ -44,6 +53,23 @@ const ExhibitList = () => {
             <div>出品者: {card.ownerName || card.ownerId}</div>
             <div>出品金額: {card.price ? `${card.price}円` : '未設定'}</div>
             <div>出品日時: {card.exhibitedAt?.toDate ? card.exhibitedAt.toDate().toLocaleString() : ''}</div>
+            {card.price && (
+              <button
+                onClick={() => handlePurchase(card.id, card.price!)}
+                className={styles.purchaseButton}
+                style={{
+                  backgroundColor: '#4CAF50',
+                  color: 'white',
+                  padding: '10px 20px',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  marginTop: '10px'
+                }}
+              >
+                購入する
+              </button>
+            )}
           </li>
         ))}
       </ul>
