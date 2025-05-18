@@ -1,0 +1,231 @@
+.profileEditRoot {
+  background: #f3f4f6;
+  min-height: 100vh;
+  padding: 40px 0;
+}
+
+.profileEditForm {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.08);
+  padding: 40px 32px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.profileEditHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatarWrapper {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  margin-bottom: 8px;
+}
+
+.avatarImg {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 12px 0 rgba(37,99,235,0.12);
+  border: 3px solid #dbeafe;
+  background: #f1f5f9;
+}
+
+.avatarPlaceholder {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: 3px solid #dbeafe;
+}
+
+.avatarInput {
+  margin-top: 8px;
+}
+
+.uploadingText {
+  color: #2563eb;
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.usernameSection {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 4px;
+  transition: border 0.2s;
+}
+.input:focus {
+  border-color: #2563eb;
+  outline: none;
+}
+
+.errorText {
+  color: #ef4444;
+  font-size: 0.95rem;
+  margin-top: 2px;
+}
+
+.profileEditBody {
+  display: flex;
+  gap: 32px;
+}
+
+.leftCol, .rightCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sectionCard {
+  background: #f9fafb;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+  padding: 24px 20px;
+  margin-bottom: 0;
+  border: 1px solid #e5e7eb;
+}
+
+.label {
+  font-weight: 600;
+  color: #2563eb;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.tagItem {
+  background: #eff6ff;
+  color: #2563eb;
+  border-radius: 9999px;
+  padding: 6px 16px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: 1px solid #dbeafe;
+  transition: background 0.2s, color 0.2s;
+  user-select: none;
+}
+.tagItemSelected {
+  background: #2563eb;
+  color: #fff;
+}
+
+.textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  min-height: 100px;
+  resize: vertical;
+  margin-bottom: 4px;
+  transition: border 0.2s;
+}
+.textarea:focus {
+  border-color: #2563eb;
+  outline: none;
+}
+
+.charCount {
+  font-size: 0.95rem;
+  color: #9ca3af;
+  text-align: right;
+}
+
+.uploadButton {
+  width: 100%;
+  background: linear-gradient(90deg, #34d399 0%, #2563eb 100%);
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px 0;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  box-shadow: 0 2px 8px 0 rgba(37,99,235,0.08);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.uploadButton:disabled {
+  background: #a5b4fc;
+  cursor: not-allowed;
+}
+
+.infoBox {
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}
+
+.saveButton {
+  width: 100%;
+  background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 16px 0;
+  border: none;
+  border-radius: 14px;
+  margin-top: 32px;
+  box-shadow: 0 4px 16px 0 rgba(37,99,235,0.10);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.saveButton:hover {
+  background: linear-gradient(90deg, #60a5fa 0%, #2563eb 100%);
+}
+
+@media (max-width: 900px) {
+  .profileEditForm {
+    padding: 24px 8px;
+  }
+  .profileEditBody {
+    flex-direction: column;
+    gap: 0;
+  }
+  .leftCol, .rightCol {
+    gap: 16px;
+  }
+} 
