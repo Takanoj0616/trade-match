@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { db } from '@/lib/firebase';
 import { collection, getDocs, addDoc } from 'firebase/firestore';
 import Image from 'next/image';
+import Link from 'next/link';
+import styles from '@/styles/users.module.css';
 
 const TAG_OPTIONS = ['アニメ', 'サウナ', 'カメラ', 'ゲーム', 'スポーツ', '旅行', '音楽'];
 
@@ -25,7 +27,6 @@ const UsersPage = ({ currentUserId }: { currentUserId: string }) => {
     const fetchUsers = async () => {
       setLoading(true);
       const snap = await getDocs(collection(db, 'users'));
-      // 自分以外のユーザーのみ
       const userList = snap.docs
         .map(doc => ({ id: doc.id, ...doc.data() } as UserProfile))
         .filter(user => user.id !== currentUserId);
@@ -34,48 +35,70 @@ const UsersPage = ({ currentUserId }: { currentUserId: string }) => {
 
       const usersCollectionRef = collection(db, 'users');
       for (const user of userList) {
-        if (!user.username) continue; // usernameが空ならスキップ
+        if (!user.username) continue;
         await addDoc(usersCollectionRef, user);
       }
     };
     fetchUsers();
   }, [currentUserId]);
 
-  if (loading) return <div>読み込み中...</div>;
+  if (loading) return <div className={styles.loading}>読み込み中...</div>;
 
   return (
-    <div>
-      <h1>お相手一覧</h1>
-      <ul>
+    <div className={styles.container}>
+      <Link href="/" className={styles.backButton}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          />
+        </svg>
+        戻る
+      </Link>
+      <h1 className={styles.title}>お相手一覧</h1>
+      <div className={styles.userList}>
         {users.map((user) => (
-          <li key={user.id} className="mb-8 p-4 border rounded-lg flex gap-4 items-center">
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div key={user.id} className={styles.userCard}>
+            <div className={styles.avatarContainer}>
               <Image
                 src={user.avatarUrl && user.avatarUrl !== '' ? user.avatarUrl : '/dummy.png'}
                 alt={user.username}
-                width={96}
-                height={96}
-                style={{ borderRadius: '50%', objectFit: 'cover' }}
+                width={120}
+                height={120}
+                className={styles.avatar}
               />
             </div>
-            <div>
-              <div className="text-sm text-gray-600">{user.username}</div>
-              <div className="text-sm text-gray-600">年齢: {user.age}</div>
-              <div className="text-sm text-gray-600">性別: {user.gender}</div>
-              <div className="text-sm text-gray-600">
-                趣味: {user.tags && user.tags.length > 0 ? user.tags.join(', ') : '未設定'}
-              </div>
-              <div className="text-sm mt-1">自己紹介: {user.bio}</div>
+            <div className={styles.userInfo}>
+              <h2 className={styles.username}>{user.username}</h2>
+              <div className={styles.userDetail}>年齢: {user.age}</div>
+              <div className={styles.userDetail}>性別: {user.gender}</div>
+              {user.tags && user.tags.length > 0 && (
+                <div className={styles.tags}>
+                  {user.tags.map((tag, index) => (
+                    <span key={index} className={styles.tag}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <div className={styles.bio}>{user.bio}</div>
+              <button
+                onClick={() => {/* ここでhandleLike(currentUserId, user.id)などを呼び出し */}}
+                className={styles.likeButton}
+              >
+                いいね
+              </button>
             </div>
-            <button
-              onClick={() => {/* ここでhandleLike(currentUserId, user.id)などを呼び出し */}}
-              className="ml-auto bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            >
-              いいね
-            </button>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
