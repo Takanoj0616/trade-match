@@ -4,10 +4,12 @@ import { collection, getDocs } from 'firebase/firestore';
 import { useAuth } from '../hooks/useAuth';
 import styles from '../styles/showCards.module.css';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const ShowCards = () => {
   const [cards, setCards] = useState<any[]>([]);
   const { user } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     if (!user) return;
@@ -26,8 +28,14 @@ const ShowCards = () => {
   if (!user) return <div>ログインしてください</div>;
 
   return (
-    <div>
-      <h1>自分のカード一覧</h1>
+    <div className={styles.container}>
+      <button onClick={() => router.back()} className={styles.backButton}>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        戻る
+      </button>
+      <h1 className={styles.title}>自分のカード一覧</h1>
       <ul className={styles.cardList}>
         {cards.map((card, idx) => (
           <li key={card.id || idx} className={styles.cardItem}>

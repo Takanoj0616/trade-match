@@ -8,7 +8,8 @@ import styles from '@/styles/messages.module.css';
 type Message = {
   id: string;
   text: string;
-  user1: string;
+  senderId: string;
+  chatMembers: string[];
   timestamp: Date;
   isSent: boolean;
 };
@@ -22,37 +23,35 @@ const MessagesPage = () => {
 
   useEffect(() => {
     if (!id) return;
-
+    const chatMembers = [currentUserId, id].sort();
     const messagesRef = collection(db, 'messages');
     const q = query(
       messagesRef,
-      where('user1', 'in', [id, currentUserId]),
+      where('chatMembers', '==', chatMembers),
       orderBy('timestamp', 'asc')
     );
-
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const msgs = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
         timestamp: doc.data().timestamp?.toDate(),
-        isSent: doc.data().user1 === currentUserId
+        isSent: doc.data().senderId === currentUserId
       })) as Message[];
       setMessages(msgs);
     });
-
     return () => unsubscribe();
   }, [id, currentUserId]);
 
   const sendMessage = async () => {
     if (!newMessage.trim() || !id) return;
-
+    const chatMembers = [currentUserId, id].sort();
     const messagesRef = collection(db, 'messages');
     await addDoc(messagesRef, {
-      user1: currentUserId,
+      senderId: currentUserId,
+      chatMembers,
       text: newMessage.trim(),
       timestamp: new Date(),
     });
-
     setNewMessage('');
   };
 

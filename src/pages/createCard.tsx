@@ -47,29 +47,53 @@ const CreateCard = () => {
 
   return (
     <div className={styles.container}>
-      <h1>カード新規作成</h1>
+      <button onClick={() => router.back()} className={styles.backButton}>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        戻る
+      </button>
+      <h1 className={styles.title}>カード新規作成</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
         <label>
-          名前:
-          <input type="text" value={name} onChange={e => setName(e.target.value)} />
+          名前
+          <input
+            type="text"
+            value={name}
+            onChange={e => setName(e.target.value)}
+            placeholder="カードの名前を入力"
+          />
         </label>
         <label>
-          HP:
-          <input type="number" value={hp} onChange={e => setHp(e.target.value)} />
+          HP
+          <input
+            type="number"
+            value={hp}
+            onChange={e => setHp(e.target.value)}
+            placeholder="HPを入力"
+            min="0"
+          />
         </label>
         <label>
-          タイプ:
-          <input type="text" value={type} onChange={e => setType(e.target.value)} />
+          タイプ
+          <input
+            type="text"
+            value={type}
+            onChange={e => setType(e.target.value)}
+            placeholder="タイプを入力"
+          />
         </label>
         <label>
-           画像ファイル:
+          画像ファイル
           <input
             type="file"
             accept="image/*"
             onChange={e => setImageFile(e.target.files ? e.target.files[0] : null)}
           />
         </label>
-        <button type="submit" className={styles.submitButton}>作成</button>
+        <button type="submit" className={styles.submitButton}>
+          カードを作成
+        </button>
       </form>
     </div>
   );

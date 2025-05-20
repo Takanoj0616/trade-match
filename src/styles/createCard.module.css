@@ -1,36 +1,122 @@
 .container {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 24px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  background: #fff;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f7fafc;
+  color: #4a5568;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  border: 1px solid #e2e8f0;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 2rem;
+}
+
+.backButton:hover {
+  background: #edf2f7;
+  transform: translateX(-4px);
+}
+
+.backButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(to right, #4299e1, #667eea);
+  border-radius: 2px;
 }
 
 .form {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1.5rem;
 }
 
-.input {
-  width: 100%;
-  padding: 6px 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.form input[type="text"],
+.form input[type="number"] {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.form input[type="text"]:focus,
+.form input[type="number"]:focus {
+  outline: none;
+  border-color: #4299e1;
+}
+
+.form input[type="file"] {
+  padding: 0.75rem;
+  border: 2px dashed #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.form input[type="file"]:hover {
+  border-color: #4299e1;
 }
 
 .submitButton {
-  background: #3b82f6;
-  color: #fff;
+  background: linear-gradient(to right, #4299e1, #667eea);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
   border: none;
-  border-radius: 6px;
-  padding: 10px 0;
-  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: transform 0.2s ease-in-out;
+  margin-top: 1rem;
 }
 
 .submitButton:hover {
-  background: #2563eb;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .form {
+    padding: 1.5rem;
+  }
 }
