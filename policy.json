@@ -1,0 +1,26 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "AllowSNS",
+			"Effect": "Allow",
+			"Action": [
+				"sns:Subscribe",
+				"sns:Unsubscribe",
+				"sns:ListSubscriptions",
+				"sns:GetTopicAttributes"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "AllowLogs",
+			"Effect": "Allow",
+			"Action": [
+				"logs:CreateLogGroup",
+				"logs:CreateLogStream",
+				"logs:PutLogEvents"
+			],
+			"Resource": "*"
+		}
+	]
+} 

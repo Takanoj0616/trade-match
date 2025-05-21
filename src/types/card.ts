@@ -1,11 +1,14 @@
+export type CardType = 'unit' | 'spell' | 'trap';
+export type CardRarity = 'common' | 'rare' | 'epic' | 'legendary';
+
 export interface CardData {
-  id: string; 
+  id: string;
   name: string;
-  imageUrl: string;
-  cost: number; 
-  attack?: number;
-  health?: number; 
   description: string;
-  rarity: 'common' | 'rare' | 'epic' | 'legendary'; 
-  type: 'unit' | 'action'; /
+  cost: number;
+  type: CardType;
+  rarity: CardRarity;
+  imageUrl: string;
+  attack?: number;  // ユニットカードの場合のみ
+  health?: number;  // ユニットカードの場合のみ
 }
