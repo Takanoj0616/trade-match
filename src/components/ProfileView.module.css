@@ -1,0 +1,57 @@
+.profileViewContainer {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileViewTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.avatarContainer {
+  margin-bottom: 24px;
+}
+
+.avatarImg {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #eee;
+}
+
+.avatarPlaceholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  font-size: 1rem;
+}
+
+.profileInfo {
+  width: 100%;
+  space-y: 12px;
+}
+
+.infoItem {
+  margin-bottom: 12px;
+}
+
+.infoLabel {
+  font-weight: 600;
+  color: #555;
+  margin-right: 8px;
+} 

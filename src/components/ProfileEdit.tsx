@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { db } from '@/lib/firebase';
 import { doc, setDoc, Timestamp, getDoc, collection, addDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -22,6 +22,8 @@ export default function ProfileEdit({ userId, ownedCards = 0, createdAt, lastLog
   const [cardUploading, setCardUploading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const avatarInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -132,11 +134,29 @@ export default function ProfileEdit({ userId, ownedCards = 0, createdAt, lastLog
           <div className={styles.avatarSection}>
             <div className={styles.avatarWrapper}>
               {profile.avatarUrl ? (
-                <img src={profile.avatarUrl} alt="avatar" className={styles.avatarImg} />
+                <img
+                  src={profile.avatarUrl}
+                  alt="avatar"
+                  className={styles.avatarImg}
+                  onClick={() => avatarInputRef.current?.click()}
+                  style={{ cursor: 'pointer' }}
+                />
               ) : (
-                <div className={styles.avatarPlaceholder}>No Image</div>
+                <div
+                  className={styles.avatarPlaceholder}
+                  onClick={() => avatarInputRef.current?.click()}
+                  style={{ cursor: 'pointer' }}
+                >
+                  No Image
+                </div>
               )}
-              <input type="file" accept="image/*" onChange={handleAvatarChange} className={styles.avatarInput} />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleAvatarChange}
+                className={styles.avatarInput}
+                ref={avatarInputRef}
+              />
               {uploading && <div className={styles.uploadingText}>アップロード中...</div>}
             </div>
             <div className={styles.usernameSection}>

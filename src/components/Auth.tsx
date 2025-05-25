@@ -23,8 +23,16 @@ export default function Auth() {
     }
     try {
       if (isLogin) {
+        if (!email || !password) {
+          alert('メールアドレスとパスワードを入力してください。');
+          return;
+        }
         await signInWithEmailAndPassword(auth, email, password);
       } else {
+        if (!email || !password) {
+          alert('メールアドレスとパスワードを入力してください。');
+          return;
+        }
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         await setDoc(doc(db, 'users', user.uid), {

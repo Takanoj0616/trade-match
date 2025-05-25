@@ -4,13 +4,14 @@ import { useRouter } from 'next/navigation';
 import styles from '../styles/Home.module.css';
 import ProfileView from '../components/ProfileView';
 import { useAuth } from '../hooks/useAuth';
+import Auth from '../components/Auth';
 
 const HomePage = () => {
   const router = useRouter();
   const { user, logout } = useAuth();
 
   if (!user) {
-    return <div>ログインしてください</div>;
+    return <Auth />;
   }
 
   return (
