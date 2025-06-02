@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from 'react';
 import { db } from '@/lib/firebase';
 import { doc, setDoc, Timestamp, getDoc, collection, addDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { UserProfile } from '@/types/user';
 import styles from './ProfileEdit.module.css';
 
 const TAG_OPTIONS = ['アニメ', 'サウナ', 'カメラ', 'ゲーム', 'スポーツ', '旅行', '音楽'];
